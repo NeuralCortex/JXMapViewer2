@@ -1,24 +1,31 @@
 # JXMapViewer2 2.9.0
 
-![image](https://github.com/NeuralCortex/JXMapViewer2/blob/main/images/app.png)
+![Application Screenshot](https://github.com/NeuralCortex/JXMapViewer2/blob/main/images/app.png)
 
-This project is based on JXMapViewer2, which you can find [here](https://github.com/msteiger/jxmapviewer2). I decided not to create a fork
-because I don't use IntelliJ. Since the original project has not been maintained for a long time, it was necessary to make some adjustments.
+## Overview
 
-New features:
+This project is an enhanced version of JXMapViewer2, originally developed by [msteiger](https://github.com/msteiger/jxmapviewer2). Instead of forking the original repository, this version was created as a standalone project due to differences in development environments (IntelliJ was not used). As the original JXMapViewer2 has not been maintained, this version introduces several updates and improvements to ensure compatibility and enhance functionality.
 
-1. Apache NetBeans 27 Maven project
-2. Support for Java version 24
-3. Modern logger (Log4J 2)
-4. Examples are now integrated (easy to extend)
-5. Proxy support - with and without authentication (must be tested by you)
-6. Performance improvement
-7. Modern icons
-8. OSM Tile Server Response 301 fix (the original library no longer worked because of this)
+## Features
 
-## Attribution links
+- Built as a Maven project in Apache NetBeans 27.
+- Supports Java 24.
+- Uses modern logging with Log4j 2.
+- Includes integrated examples for easy extension.
+- Adds proxy support (with and without authentication; requires user testing).
+- Improves performance over the original library.
+- Updates icons to modern designs.
+- Fixes the OSM Tile Server Response 301 issue, which caused the original library to stop functioning.
 
-<a href="https://www.flaticon.com/free-icons/waypoint" title="waypoint icons">Waypoint icons created by HideMaru - Flaticon</a><br>
-<a href="https://www.flaticon.com/free-icons/plus-sign" title="plus sign icons">Plus sign icons created by riajulislam - Flaticon</a><br>
-<a href="https://www.flaticon.com/free-icons/zip-line" title="zip line icons">Zip line icons created by riajulislam - Flaticon</a><br>
-<a href="https://www.flaticon.com/free-icons/layout" title="layout icons">Layout icons created by Freepik - Flaticon</a><br>
+## Technologies Used
+
+- **IDE**: [Apache NetBeans 27](https://netbeans.apache.org/)
+- **Java SDK**: [Java 24](https://www.oracle.com/java/technologies/downloads/#jdk24-windows)
+- **Logging**: [Log4j 2](https://logging.apache.org/log4j/2.12.x/)
+
+## Attribution
+
+- [Waypoint icons](https://www.flaticon.com/free-icons/waypoint) created by HideMaru - Flaticon
+- [Plus sign icons](https://www.flaticon.com/free-icons/plus-sign) created by riajulislam - Flaticon
+- [Zip line icons](https://www.flaticon.com/free-icons/zip-line) created by riajulislam - Flaticon
+- [Layout icons](https://www.flaticon.com/free-icons/layout) created by Freepik - Flaticon
