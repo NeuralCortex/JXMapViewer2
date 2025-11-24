@@ -20,6 +20,7 @@ import org.jxmapviewer.OSMTileFactoryInfo;
 import org.jxmapviewer.cache.FileBasedLocalCache;
 import org.jxmapviewer.examples.LayoutFunctions;
 import org.jxmapviewer.examples.controller.MainController;
+import org.jxmapviewer.examples.controller.PopulateInterface;
 import org.jxmapviewer.input.CenterMapListener;
 import org.jxmapviewer.input.PanKeyListener;
 import org.jxmapviewer.input.PanMouseInputListener;
@@ -40,7 +41,7 @@ import org.jxmapviewer.viewer.WaypointPainter;
  *
  * @author Neural Cortex
  */
-public class WaypointController extends JPanel implements ActionListener {
+public class WaypointController extends JPanel implements ActionListener, PopulateInterface {
 
     private final MainController mainController;
 
@@ -96,25 +97,7 @@ public class WaypointController extends JPanel implements ActionListener {
         mapViewer.addMouseWheelListener(new ZoomMouseWheelListenerCursor(mapViewer));
         mapViewer.addKeyListener(new PanKeyListener(mapViewer));
 
-        MousePositionListener mousePositionListener = new MousePositionListener(mapViewer);
-        mousePositionListener.setGeoPosListener((GeoPosition geoPosition) -> {
-            String lat = String.format("%.5f", geoPosition.getLatitude());
-            String lon = String.format("%.5f", geoPosition.getLongitude());
-            mainController.getLabelStatus().setText("Latitude: " + lat + " Longitude: " + lon);
-        });
-        mapViewer.addMouseMotionListener(mousePositionListener);
-
-        HashMap<String, Object> map = generateRandomWaypoints(LOCATIONS);
-        Set<Waypoint> waypoints = (Set<Waypoint>) map.get("waypoints");
-
-        WaypointPainter<Waypoint> wpainter = new WaypointPainter<>();
-        wpainter.setWaypoints(waypoints);
-        wpainter.setRenderer(new DefaultWaypointRenderer(50.0));
-        painters.add(new RoutePainter((List<GeoPosition>) map.get("track")));
-        painters.add(wpainter);
-
-        CompoundPainter<JXMapViewer> painter = new CompoundPainter<>(painters);
-        mapViewer.setOverlayPainter(painter);
+        mapViewer.addMouseMotionListener(MainController.getPositionListener(mapViewer));
     }
 
     /**
@@ -177,5 +160,25 @@ public class WaypointController extends JPanel implements ActionListener {
             CompoundPainter<JXMapViewer> painter = new CompoundPainter<>(painters);
             mapViewer.setOverlayPainter(painter);
         }
+    }
+
+    @Override
+    public void populate() {
+        HashMap<String, Object> map = generateRandomWaypoints(LOCATIONS);
+        Set<Waypoint> waypoints = (Set<Waypoint>) map.get("waypoints");
+
+        WaypointPainter<Waypoint> wpainter = new WaypointPainter<>();
+        wpainter.setWaypoints(waypoints);
+        wpainter.setRenderer(new DefaultWaypointRenderer(50.0));
+        painters.add(new RoutePainter((List<GeoPosition>) map.get("track")));
+        painters.add(wpainter);
+
+        CompoundPainter<JXMapViewer> painter = new CompoundPainter<>(painters);
+        mapViewer.setOverlayPainter(painter);
+    }
+
+    @Override
+    public void clear() {
+        painters.clear();
     }
 }

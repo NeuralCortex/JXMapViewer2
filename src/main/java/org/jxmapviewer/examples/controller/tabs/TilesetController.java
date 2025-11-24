@@ -17,6 +17,7 @@ import org.jxmapviewer.WMSTileFactoryInfo;
 import org.jxmapviewer.cache.FileBasedLocalCache;
 import org.jxmapviewer.examples.LayoutFunctions;
 import org.jxmapviewer.examples.controller.MainController;
+import org.jxmapviewer.examples.controller.PopulateInterface;
 import org.jxmapviewer.input.CenterMapListener;
 import org.jxmapviewer.input.PanKeyListener;
 import org.jxmapviewer.input.PanMouseInputListener;
@@ -31,7 +32,7 @@ import org.jxmapviewer.viewer.TileFactoryInfo;
  *
  * @author Neural Cortex
  */
-public class TilesetController extends JPanel {
+public class TilesetController extends JPanel implements PopulateInterface{
 
     private final MainController mainController;
 
@@ -123,15 +124,19 @@ public class TilesetController extends JPanel {
         mapViewer.addMouseWheelListener(new ZoomMouseWheelListenerCursor(mapViewer));
         mapViewer.addKeyListener(new PanKeyListener(mapViewer));
 
-        MousePositionListener mousePositionListener = new MousePositionListener(mapViewer);
-        mousePositionListener.setGeoPosListener((GeoPosition geoPosition) -> {
-            String lat = String.format("%.5f", geoPosition.getLatitude());
-            String lon = String.format("%.5f", geoPosition.getLongitude());
-            mainController.getLabelStatus().setText("Latitude: " + lat + " Longitude: " + lon);
-        });
-        mapViewer.addMouseMotionListener(mousePositionListener);
+        mapViewer.addMouseMotionListener(MainController.getPositionListener(mapViewer));
 
         mapViewer.setLayout(new BorderLayout());
         mapViewer.add(labelAttr, BorderLayout.SOUTH);
+    }
+
+    @Override
+    public void populate() {
+       
+    }
+
+    @Override
+    public void clear() {
+       
     }
 }

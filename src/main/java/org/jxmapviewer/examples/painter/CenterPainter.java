@@ -1,4 +1,4 @@
-package org.jxmapviewer.examples.controller.tabs;
+package org.jxmapviewer.examples.painter;
 
 import java.awt.BasicStroke;
 import java.awt.Color;

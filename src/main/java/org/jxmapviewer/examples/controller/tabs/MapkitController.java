@@ -8,6 +8,7 @@ import org.jxmapviewer.JXMapKit;
 import org.jxmapviewer.OSMTileFactoryInfo;
 import org.jxmapviewer.examples.LayoutFunctions;
 import org.jxmapviewer.examples.controller.MainController;
+import org.jxmapviewer.examples.controller.PopulateInterface;
 import org.jxmapviewer.listener.MousePositionListener;
 import org.jxmapviewer.viewer.DefaultTileFactory;
 import org.jxmapviewer.viewer.GeoPosition;
@@ -16,7 +17,7 @@ import org.jxmapviewer.viewer.TileFactoryInfo;
 /**
  * @author Neural Cortex
  */
-public class MapkitController extends JPanel {
+public class MapkitController extends JPanel implements PopulateInterface{
 
     private final MainController mainController;
 
@@ -52,13 +53,17 @@ public class MapkitController extends JPanel {
         mapKit.setZoom(11);
         mapKit.setAddressLocation(gp);
 
-        MousePositionListener mousePositionListener = new MousePositionListener(mapKit.getMainMap());
-        mousePositionListener.setGeoPosListener((GeoPosition geoPosition) -> {
-            String lat = String.format("%.5f", geoPosition.getLatitude());
-            String lon = String.format("%.5f", geoPosition.getLongitude());
-            mainController.getLabelStatus().setText("Latitude: " + lat + " Longitude: " + lon);
-        });
-        mapKit.getMainMap().addMouseMotionListener(mousePositionListener);
+        mapKit.getMainMap().addMouseMotionListener(MainController.getPositionListener(mapKit.getMainMap()));
+    }
+
+    @Override
+    public void populate() {
+       
+    }
+
+    @Override
+    public void clear() {
+       
     }
 
 }

@@ -1,6 +1,7 @@
 package org.jxmapviewer;
 
 import java.awt.Color;
+import java.util.Locale;
 import javax.swing.JFrame;
 import org.jxmapviewer.examples.HelperFunctions;
 
@@ -9,11 +10,11 @@ import org.jxmapviewer.examples.HelperFunctions;
  */
 public class Globals {
 
-    // aspect ratio 16:9
     public static final int HEIGHT = 720;
     public static final int WIDTH = (int) (HEIGHT * 18.0 / 9.0);
     public static final boolean MAXIMIZED = false;
     public static final int FRAME_STATE = MAXIMIZED ? JFrame.MAXIMIZED_BOTH : JFrame.NORMAL;
+    public static final Locale DEFAULT_LOCALE = Locale.US;
 
     public static final Color COLOR_BLUE = HelperFunctions.getColorFromHex("#2196F3");
     public static final Color COLOR_INDIGO = HelperFunctions.getColorFromHex("#3f51b5");

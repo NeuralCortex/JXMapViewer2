@@ -1,4 +1,4 @@
-package org.jxmapviewer.examples.controller.tabs;
+package org.jxmapviewer.examples.painter;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -8,6 +8,7 @@ import java.awt.RenderingHints;
 import java.awt.geom.Point2D;
 import java.util.List;
 import org.jxmapviewer.JXMapViewer;
+import org.jxmapviewer.examples.adapter.RectangleAdapter;
 import org.jxmapviewer.painter.Painter;
 import org.jxmapviewer.viewer.GeoRectangle;
 

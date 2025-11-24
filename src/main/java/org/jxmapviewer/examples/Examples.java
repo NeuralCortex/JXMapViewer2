@@ -13,8 +13,8 @@ import org.jxmapviewer.examples.controller.MainController;
  * @author Neural Cortex
  */
 public class Examples {
-    
-     private static final Logger log = LogManager.getLogger(Examples.class);
+
+    private static final Logger log = LogManager.getLogger(Examples.class);
 
     public static void main(String[] args) {
         Examples examples = new Examples();
@@ -39,7 +39,7 @@ public class Examples {
         frame.setExtendedState(Globals.FRAME_STATE);
 
         new MainController(frame);
-        
+
         HelperFunctions.centerWindow(frame);
 
         frame.setVisible(true);

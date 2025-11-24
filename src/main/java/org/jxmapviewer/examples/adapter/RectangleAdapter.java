@@ -1,4 +1,4 @@
-package org.jxmapviewer.examples.controller.tabs;
+package org.jxmapviewer.examples.adapter;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;

@@ -3,11 +3,13 @@ package org.jxmapviewer.examples.controller;
 import java.awt.BorderLayout;
 import java.text.MessageFormat;
 import java.time.LocalDate;
+import java.util.Locale;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import org.jxmapviewer.Globals;
+import org.jxmapviewer.JXMapViewer;
 import org.jxmapviewer.examples.HelperFunctions;
 import org.jxmapviewer.examples.LayoutFunctions;
 import org.jxmapviewer.examples.controller.tabs.InteractionController;
@@ -16,6 +18,8 @@ import org.jxmapviewer.examples.controller.tabs.PanZoomController;
 import org.jxmapviewer.examples.controller.tabs.SelectionController;
 import org.jxmapviewer.examples.controller.tabs.TilesetController;
 import org.jxmapviewer.examples.controller.tabs.WaypointController;
+import org.jxmapviewer.listener.MousePositionListener;
+import org.jxmapviewer.viewer.GeoPosition;
 
 /**
  * @author Neural Cortex
@@ -26,7 +30,7 @@ public class MainController extends JPanel {
     private JTabbedPane tabbedPane;
     private JPanel panelStatus;
     private JLabel labelAbout;
-    private JLabel labelStatus;
+    private static JLabel labelStatus;
 
     public MainController(JFrame frame) {
         this.frame = frame;
@@ -36,7 +40,7 @@ public class MainController extends JPanel {
     private void init() {
         setLayout(new BorderLayout());
 
-        String about = MessageFormat.format("Copyright (c) {0} Neural Cortex", String.format("%d", LocalDate.now().getYear()));
+        String about = MessageFormat.format("Copyright \u00A9 {0} Neural Cortex", String.format("%d", LocalDate.now().getYear()));
         labelAbout = new JLabel(about);
         labelStatus = new JLabel("");
 
@@ -54,6 +58,22 @@ public class MainController extends JPanel {
         HelperFunctions.addTab(tabbedPane, new WaypointController(this), "Waypoint");
         HelperFunctions.addTab(tabbedPane, new TilesetController(this), "Tilesets");
         HelperFunctions.addTab(tabbedPane, new MapkitController(this), "Mapkit");
+
+        tabbedPane.addChangeListener(e -> {
+            PopulateInterface populateInterface = (PopulateInterface) tabbedPane.getSelectedComponent();
+            populateInterface.clear();
+            populateInterface.populate();
+        });
+    }
+
+    public static MousePositionListener getPositionListener(JXMapViewer mapViewer) {
+        MousePositionListener mousePositionListener = new MousePositionListener(mapViewer);
+        mousePositionListener.setGeoPosListener((GeoPosition geoPosition) -> {
+            String lat = String.format(Globals.DEFAULT_LOCALE, "%.5f", geoPosition.getLatitude());
+            String lon = String.format(Globals.DEFAULT_LOCALE, "%.5f", geoPosition.getLongitude());
+            labelStatus.setText("Latitude: " + lat + " Longitude: " + lon);
+        });
+        return mousePositionListener;
     }
 
     public JLabel getLabelStatus() {
